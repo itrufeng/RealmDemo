@@ -36,8 +36,8 @@ dependencies {
     compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
     compile "io.realm:realm-android-library:0.87.1@aar"
     compile "io.realm:realm-annotations:0.87.1"
-//    kapt "io.realm:realm-annotations:0.87.1"
-//    kapt "io.realm:realm-annotations-processor:0.87.1"
+    kapt "io.realm:realm-annotations:0.87.1"
+    kapt "io.realm:realm-annotations-processor:0.87.1"
 }
 buildscript {
     ext.kotlin_version = '1.0.0-beta-4589'
