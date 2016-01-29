@@ -24,9 +24,9 @@ import rx.Observable
 import rx.lang.kotlin.observable
 
 class MainActivity : AppCompatActivity() {
-    var data = arrayListOf(RealmUser("A", 29),
-            RealmUser("B", 34),
-            RealmUser("C", 25))
+    var data = arrayListOf(RealmUser(),
+            RealmUser(),
+            RealmUser())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,19 +79,20 @@ class MainActivity : AppCompatActivity() {
     private fun setupSaveButton() {
         fun setupDB() {
             val config = RealmConfiguration.Builder(this)
-//                    .name("db.realm")
-//                    .migration { dynamicRealm, old, new ->
-//                        val schema = dynamicRealm.schema
-//                        schema.create("RealmUser")
-//                        .addField("username", String::class.java)
-//                        .addField("age", Int::class.java)
-//                    }
+                    .name("db.realm")
+                    .migration { dynamicRealm, old, new ->
+                        val schema = dynamicRealm.schema
+                        schema.create("RealmUser")
+                                .addField("username", String::class.java)
+                                .addField("age", Int::class.java)
+                    }
                     .build()
             Realm.deleteRealm(config)
-            val realm = Realm.getInstance(this)
+            val realm = Realm.getInstance(config)
             Log.e("Fuck", realm.toString())
             realm.beginTransaction()
             val user = realm.createObject(RealmUser::class.java)
+            user.username = "sss"
             realm.copyFromRealm(user)
             realm.commitTransaction()
         }
